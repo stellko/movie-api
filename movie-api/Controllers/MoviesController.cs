@@ -21,24 +21,24 @@ namespace movie_api.Controllers
         }
 
         [HttpGet("toprated")]
-        public async Task<MovieResultsDto> GetTopRatedMovies(string apiKey = "54e106ed5ac2697be6cdc22a76b0d044")
+        public async Task<MovieResults> GetTopRatedMovies()
         {
             _logger.LogInformation("Getting top rated movies");
-            return await _mediator.Send(new GetTopRatedMoviesRequest {ApiKey = apiKey});
+            return await _mediator.Send(new GetTopRatedMoviesRequest());
         }
         
         [HttpGet("upcoming")]
-        public async Task<MovieResultsDto> GetUpcomingMovies(string apiKey = "54e106ed5ac2697be6cdc22a76b0d044")
+        public async Task<MovieResults> GetUpcomingMovies()
         {
             _logger.LogInformation("Getting upcoming movies");
-            return await _mediator.Send(new GetUpcomingMoviesRequest {ApiKey = apiKey});
+            return await _mediator.Send(new GetUpcomingMoviesRequest());
         }
         
         [HttpGet("nowplaying")]
-        public async Task<MovieResultsDto> GetNowPlayingMovies(string apiKey = "54e106ed5ac2697be6cdc22a76b0d044")
+        public async Task<MovieResults> GetNowPlayingMovies()
         {
             _logger.LogInformation("Getting now playing movies");
-            return await _mediator.Send(new GetNowPlayingMoviesRequest {ApiKey = apiKey});
+            return await _mediator.Send(new GetNowPlayingMoviesRequest());
         }
     }
 }

@@ -5,7 +5,7 @@ using movie_core.Requests;
 
 namespace movie_core.RequestHandlers
 {
-    public class GetNowPlayingMoviesRequestHandler : IRequestHandler<GetNowPlayingMoviesRequest, MovieResultsDto>
+    public class GetNowPlayingMoviesRequestHandler : IRequestHandler<GetNowPlayingMoviesRequest, MovieResults>
     {
         private readonly IMovieHttpClient _movieHttpClient;
 
@@ -14,9 +14,10 @@ namespace movie_core.RequestHandlers
             _movieHttpClient = movieHttpClient;
         }
         
-        public async Task<MovieResultsDto> Handle(GetNowPlayingMoviesRequest request, CancellationToken cancellationToken)
+        public async Task<MovieResults> Handle(GetNowPlayingMoviesRequest request, CancellationToken cancellationToken)
         {
-            return await _movieHttpClient.GetNowPlayingMovies(request.ApiKey);
+            var nowPlayingMovies = await _movieHttpClient.GetNowPlayingMovies();
+            return nowPlayingMovies.ToMovieResults();
         }
     }
 }

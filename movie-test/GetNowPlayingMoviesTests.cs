@@ -15,8 +15,8 @@ namespace movie_test
         {
             //Arrange
             var movieHttpClientMock = new Mock<IMovieHttpClient>();
-            movieHttpClientMock.Setup(client => client.GetNowPlayingMovies(It.IsAny<string>()))
-                .ReturnsAsync(new MovieResultsDto {page = 1, results = new List<MovieDto>()});
+            movieHttpClientMock.Setup(client => client.GetNowPlayingMovies())
+                .ReturnsAsync(new MovieResultsDto {Page = 1, Results = new List<MovieDto>()});
 
             var handler = new GetNowPlayingMoviesRequestHandler(movieHttpClientMock.Object);
 
@@ -24,7 +24,7 @@ namespace movie_test
             var result = await handler.Handle(new GetNowPlayingMoviesRequest(), new CancellationToken());
 
             //Assert
-            Assert.Empty(result.results);
+            Assert.Empty(result.Movies);
         }
     }
 }

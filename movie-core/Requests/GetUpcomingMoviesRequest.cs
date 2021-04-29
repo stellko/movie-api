@@ -2,8 +2,7 @@ using MediatR;
 
 namespace movie_core.Requests
 {
-    public class GetUpcomingMoviesRequest : IRequest<MovieResultsDto>
+    public class GetUpcomingMoviesRequest : IRequest<MovieResults>
     {
-        public string ApiKey { get; set; }
     }
 }

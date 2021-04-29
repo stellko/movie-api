@@ -5,7 +5,7 @@ using movie_core.Requests;
 
 namespace movie_core.RequestHandlers
 {
-    public class GetTopRatedMoviesRequestHandler : IRequestHandler<GetTopRatedMoviesRequest, MovieResultsDto>
+    public class GetTopRatedMoviesRequestHandler : IRequestHandler<GetTopRatedMoviesRequest, MovieResults>
     {
         private readonly IMovieHttpClient _movieHttpClient;
 
@@ -14,9 +14,10 @@ namespace movie_core.RequestHandlers
             _movieHttpClient = movieHttpClient;
         }
 
-        public async Task<MovieResultsDto> Handle(GetTopRatedMoviesRequest request, CancellationToken cancellationToken)
+        public async Task<MovieResults> Handle(GetTopRatedMoviesRequest request, CancellationToken cancellationToken)
         {
-            return await _movieHttpClient.GetTopRatedMovies(request.ApiKey);
+            var topRatedMovies = await _movieHttpClient.GetTopRatedMovies();
+            return topRatedMovies.ToMovieResults();
         }
     }
 }

@@ -15,12 +15,12 @@ namespace movie_test
         {
             //Arrange
             var movieHttpClientMock = new Mock<IMovieHttpClient>();
-            movieHttpClientMock.Setup(client => client.GetUpcomingMovies(It.IsAny<string>()))
-                .ReturnsAsync(new MovieResultsDto {page = 1, results = new List<MovieDto>
+            movieHttpClientMock.Setup(client => client.GetUpcomingMovies())
+                .ReturnsAsync(new MovieResultsDto {Page = 1, Results = new List<MovieDto>
                 {
                     new MovieDto
                     {
-                        original_title = "Gone Girl"
+                        OriginalTitle = "Gone Girl"
                     }
                 }});
 
@@ -30,7 +30,7 @@ namespace movie_test
             var result = await handler.Handle(new GetUpcomingMoviesRequest(), new CancellationToken());
 
             //Assert
-            Assert.Equal(1, result.page);
+            Assert.Equal(1, result.Page);
         }
     }
 }
